@@ -3,7 +3,6 @@ name: Benchmark execution time comparison with the main branch
 on:
   pull_request:
     branches: [main]
-    types: [labeled]
 
 jobs:
   benchmark-exec-time:

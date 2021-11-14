@@ -1,10 +1,10 @@
 name: Benchmark execution time compare with the main branch
 
 on:
-  push:
-    types: [labeled]
-  pull_request:
-    types: [labeled]
+  # push:
+  #   types: [labeled]
+  # pull_request:
+  #   types: [labeled]
   workflow_dispatch:
 
 jobs:

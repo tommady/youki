@@ -6,7 +6,7 @@ on:
 
 jobs:
   benchmark-exec-time:
-    if: github.event.label.name == 'benchmark-exec-time'
+    if: contains( github.event.pull_request.labels.*.name, 'benchmark-exec-time' )
 
     runs-on: ubuntu-latest
 

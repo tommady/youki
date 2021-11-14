@@ -1,9 +1,10 @@
 name: Benchmark execution time compare with the main branch
 
 on:
+  push:
+    branches: [main]
   pull_request:
     branches: [main]
-  workflow_dispatch:
 
 jobs:
   benchmark-exec-time:

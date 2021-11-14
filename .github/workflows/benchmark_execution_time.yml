@@ -10,57 +10,57 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Setup Linux building env
-        run: |
-          sudo apt -y update
-          sudo apt install jq libsystemd-dev librust-libdbus-sys-dev libseccomp-dev
+    - name: Setup Linux building env
+      run: |
+        sudo apt -y update
+        sudo apt install jq libsystemd-dev librust-libdbus-sys-dev libseccomp-dev
 
-      - name: Building pr branch
-        uses: actions/checkout@v2
-        uses: actions-rs/toolchain@v1
-        with:
-          override: true
-          profile: minimal
-        uses: Swatinem/rust-cache@v1
-        uses: actions/upload-artifact@v2
-        with:
-          name: pr-youki
-          path: ./youki
-        run: ./build.sh --release
+    - name: Building pr branch
+      uses: actions/checkout@v2
+      uses: actions-rs/toolchain@v1
+      with:
+        override: true
+        profile: minimal
+      uses: Swatinem/rust-cache@v1
+      uses: actions/upload-artifact@v2
+      with:
+        name: pr-youki
+        path: ./youki
+      run: ./build.sh --release
 
-      - name: Building main branch
-        uses: actions/checkout@v2
-        with:
-          ref: main
-        uses: actions-rs/toolchain@v1
-        with:
-          override: true
-          profile: minimal
-        uses: Swatinem/rust-cache@v1
-        uses: actions/upload-artifact@v2
-        with:
-          name: main-youki
-          path: ./youki
-        run: ./build.sh --release
+    - name: Building main branch
+      uses: actions/checkout@v2
+      with:
+        ref: main
+      uses: actions-rs/toolchain@v1
+      with:
+        override: true
+        profile: minimal
+      uses: Swatinem/rust-cache@v1
+      uses: actions/upload-artifact@v2
+      with:
+        name: main-youki
+        path: ./youki
+      run: ./build.sh --release
 
-      - name: Downloading candidate binaries 
-        uses: actions/download-artifact@v2
-        with:
-          name: pr-youki
-          path: ./pr-youki
-        uses: actions/download-artifact@v2
-        with:
-          name: main-youki
-          path: ./main-youki
+    - name: Downloading candidate binaries 
+      uses: actions/download-artifact@v2
+      with:
+        name: pr-youki
+        path: ./pr-youki
+      uses: actions/download-artifact@v2
+      with:
+        name: main-youki
+        path: ./main-youki
 
-      - name: Installing hyperfine
-        run: |
-          curl -s https://api.github.com/repos/sharkdp/hyperfine/releases/latest \
-          | jq -r '.assets[] | select(.name? | match("hyperfine-musl_.*_amd64.deb")) | .browser_download_url' \
-          | wget -qi -
-          sudo dpkg -i *.deb
+    - name: Installing hyperfine
+      run: |
+        curl -s https://api.github.com/repos/sharkdp/hyperfine/releases/latest \
+        | jq -r '.assets[] | select(.name? | match("hyperfine-musl_.*_amd64.deb")) | .browser_download_url' \
+        | wget -qi -
+        sudo dpkg -i *.deb
 
-      - name: Showing everything 
-        run: |
-         ls -la
-         hyperfine --version
+    - name: Showing everything 
+      run: |
+       ls -la
+       hyperfine --version

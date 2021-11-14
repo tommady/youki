@@ -2,11 +2,9 @@ name: Benchmark execution time compare with the main branch
 
 on:
   push:
-    branches: [main]
     types: [labeled]
   pull_request:
     types: [labeled]
-    branches: [main]
 
 jobs:
   benchmark-exec-time:

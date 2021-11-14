@@ -1,14 +1,13 @@
-name: Benchmark execution time compare with the main branch
+name: Benchmark execution time comparison with the main branch
 
 on:
-  push:
-    branches: [main]
   pull_request:
     branches: [main]
+    types: [labeled]
 
 jobs:
   benchmark-exec-time:
-    if: ${{ github.event.label.name == 'benchmark-exec-time' }}
+    if: github.event.label.name == 'benchmark-exec-time'
 
     runs-on: ubuntu-latest
 

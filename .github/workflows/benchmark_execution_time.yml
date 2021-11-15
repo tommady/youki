@@ -53,12 +53,14 @@ jobs:
 
     - name: Preparing benchmark bundle
       run: |
-        mkdir -p benchmark_exec_bundle/rootfs
-        cd benchmark_exec_bundle
+        mkdir -p benchmark_exec_bundle_main/rootfs
+        cd benchmark_exec_bundle_main
         sudo bash -c 'podman export $(podman create busybox) | tar -C rootfs -xvf -'
         ../main_youki spec 
         sed -i 's/"sh"/"sh", "-c", "echo Hi, my PID is $$; echo Bye Bye"/' config.json
         sed -i 's/"terminal": true/"terminal": false/' config.json
+        cd ../
+        cp -r benchmark_exec_bundle_main benchmark_exec_bundle_pr
           
     - name: Installing hyperfine
       run: |
@@ -69,9 +71,8 @@ jobs:
 
     - name: Running benchmark
       run: |
-        ls -la
         hyperfine --prepare 'sudo sync; echo 3 | sudo tee /proc/sys/vm/drop_caches' \
         --warmup 10 \
         --min-runs 100 \
-        'sudo ./main_youki run -b benchmark_exec_bundle main_youki && sudo ./main_youki delete main_youki' \
-        'sudo ./pr_youki run -b benchmark_exec_bundle pr_youki && sudo ./pr_youki delete pr_youki'
+        'sudo ./main_youki run -b benchmark_exec_bundle_main main_youki && sudo ./main_youki delete main_youki' \
+        'sudo ./pr_youki run -b benchmark_exec_bundle_pr pr_youki && sudo ./pr_youki delete pr_youki'

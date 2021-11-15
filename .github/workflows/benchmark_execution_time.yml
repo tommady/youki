@@ -90,6 +90,13 @@ jobs:
         name: main-youki
         path: ./main_youki
 
+    - name: Preparing binaries
+      run: |
+        mv ./main_youki/youki ./youki_main
+        mv ./pr_youki/youki ./youki_pr
+        chmod +x ./youki_main
+        chmod +x ./youki_pr
+
     - name: Show folder lah
       run: | 
         ls -la
@@ -101,7 +108,7 @@ jobs:
         mkdir -p ./benchmark_exec_bundle/rootfs
         cd benchmark_exec_bundle
         sudo bash -c 'podman export $(podman create busybox) | tar -C rootfs -xvf -'
-        ../main_youki spec 
+        ../youki_main spec 
         sed -i 's/"sh"/"sh", "-c", "echo Hi, my PID is $$; echo Bye Bye"/' config.json
         sed -i 's/"terminal": true/"terminal": false/' config.json
           
@@ -117,5 +124,5 @@ jobs:
         hyperfine --show-output --prepare 'sudo sync; echo 3 | sudo tee /proc/sys/vm/drop_caches' \
         --warmup 10 \
         --min-runs 100 \
-        'sudo ./main_youki run -b benchmark_exec_bundle main_container && sudo ./main_youki delete -f main_container' \
-        'sudo ./pr_youki run -b benchmark_exec_bundle pr_container && sudo ./pr_youki delete -f pr_container'
+        'sudo ./youki_main run -b benchmark_exec_bundle main_container && sudo ./youki_main delete -f main_container' \
+        'sudo ./youki_pr run -b benchmark_exec_bundle pr_container && sudo ./youki_pr delete -f pr_container'

@@ -122,9 +122,9 @@ jobs:
         --export-markdown bench_exec_result.md \
         --warmup 10 \
         --min-runs 100 \
-        --command-name 'main youki build'
+        --command-name 'main youki build' \
         'sudo ./youki_main run -b benchmark_exec_bundle main_container && sudo ./youki_main delete -f main_container' \
-        --command-name 'pr youki build'
+        --command-name 'pr youki build' \
         'sudo ./youki_pr run -b benchmark_exec_bundle pr_container && sudo ./youki_pr delete -f pr_container'
 
     - name: Writting report to PR comment

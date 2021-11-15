@@ -99,6 +99,8 @@ jobs:
         mv ./pr_youki/youki ./youki_pr
         chmod +x ./youki_main
         chmod +x ./youki_pr
+        alias main_youki_build='sudo ./youki_main run -b benchmark_exec_bundle main_container && sudo ./youki_main delete -f main_container'
+        alias pr_youk_build='sudo ./youki_pr run -b benchmark_exec_bundle pr_container && sudo ./youki_pr delete -f pr_container'
 
     - name: Preparing benchmark bundle
       run: |
@@ -122,8 +124,8 @@ jobs:
         --export-markdown bench_exec_result.md \
         --warmup 10 \
         --min-runs 100 \
-        'sudo ./youki_main run -b benchmark_exec_bundle main_container && sudo ./youki_main delete -f main_container' \
-        'sudo ./youki_pr run -b benchmark_exec_bundle pr_container && sudo ./youki_pr delete -f pr_container'
+        'main_youki_build' \
+        'pr_youk_build'
 
     - name: Writting report to PR comment
       uses: marocchino/sticky-pull-request-comment@v2 

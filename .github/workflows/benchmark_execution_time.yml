@@ -72,4 +72,5 @@ jobs:
         hyperfine --prepare 'sudo sync; echo 3 | sudo tee /proc/sys/vm/drop_caches' \
         --warmup 10 \
         --min-runs 100 \
-        'sudo ./main_youki run -b benchmark_exec_bundle' 'sudo ./pr_youki run -b benchmark_exec_bundle'
+        'sudo ./main_youki run -b benchmark_exec_bundle main_youki && sudo ./main_youki delete main_youki' \
+        'sudo ./pr_youki run -b benchmark_exec_bundle pr_youki && sudo ./pr_youki delete pr_youki'

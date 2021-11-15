@@ -10,15 +10,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Setup Linux building env
+    - name: Setup Linux env
       run: |
         sudo apt -y update
-        sudo apt install jq libsystemd-dev librust-libdbus-sys-dev libseccomp-dev
+        sudo apt install jq podman libsystemd-dev librust-libdbus-sys-dev libseccomp-dev
 
     - name: Setting rust toolchain
       uses: actions-rs/toolchain@v1
       with:
-        toolchain: 1.56.1
         override: true
         profile: minimal
     
@@ -50,6 +49,15 @@ jobs:
       with:
         name: pr-youki
         path: ./pr-youki
+
+    - name: Preparing benchmark bundle
+      run: |
+        mkdir -p benchmark_exec_bundle/rootfs
+        cd benchmark_exec_bundle
+        sudo bash -c 'podman export $(podman create busybox) | tar -C rootfs -xvf -'
+        ../main_youki spec 
+        sed -i 's/"sh"/"sh", "-c", "echo Hi, my PID is $$; echo Bye Bye"/' config.json
+        sed -i 's/"terminal": true/"terminal": false/' config.json
           
     - name: Installing hyperfine
       run: |
@@ -58,7 +66,10 @@ jobs:
         | wget -qi -
         sudo dpkg -i *.deb
 
-    - name: Showing everything 
+    - name: Running benchmark
       run: |
-       ls -la
-       hyperfine --version
+        hyperfine --prepare 'sudo sync; echo 3 | sudo tee /proc/sys/vm/drop_caches' \
+        --warmup 10 \
+        --min-runs 100 \
+        'sudo ./main_youki run -b benchmark_exec_bundle' 'sudo ./pr_youki run -b benchmark_exec_bundle'
+ 

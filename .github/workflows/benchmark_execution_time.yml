@@ -78,6 +78,9 @@ jobs:
         sudo apt -y update
         sudo apt install jq podman
 
+    - name: Checkout to PR branch
+      uses: actions/checkout@v2
+
     - name: Downloading PR build from artifact
       uses: actions/download-artifact@v2
       with:
@@ -126,4 +129,5 @@ jobs:
       uses: iterative/setup-cml@v1
 
     - name: Writting report to PR comment
-      run: cml-send-comment bench_exec_result.md 
+      run: |
+        cml-send-comment bench_exec_result.md 

@@ -69,6 +69,7 @@ jobs:
 
     - name: Running benchmark
       run: |
+        ls -la
         hyperfine --prepare 'sudo sync; echo 3 | sudo tee /proc/sys/vm/drop_caches' \
         --warmup 10 \
         --min-runs 100 \

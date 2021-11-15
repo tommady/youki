@@ -127,6 +127,10 @@ jobs:
         --command-name 'pr youki build' \
         'sudo ./youki_pr run -b benchmark_exec_bundle pr_container && sudo ./youki_pr delete -f pr_container'
 
+    - name: Adding info into result
+      run: |
+        sed -i '1i > commit (${{ github.sha }})' bench_exec_result.md
+
     - name: Writting report to PR comment
       uses: marocchino/sticky-pull-request-comment@v2 
       with:

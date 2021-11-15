@@ -25,9 +25,6 @@ jobs:
         override: true
         profile: minimal
 
-    - name: Using cache youki
-      uses: Swatinem/rust-cache@v1
-
     - name: Building PR branch
       run: ./build.sh --release
 
@@ -59,9 +56,6 @@ jobs:
         override: true
         profile: minimal
 
-    - name: Using cache youki
-      uses: Swatinem/rust-cache@v1
-      
     - name: Building main branch
       run: ./build.sh --release
 
@@ -121,8 +115,15 @@ jobs:
 
     - name: Running benchmark
       run: |
-        hyperfine --show-output --prepare 'sudo sync; echo 3 | sudo tee /proc/sys/vm/drop_caches' \
+        hyperfine --prepare 'sudo sync; echo 3 | sudo tee /proc/sys/vm/drop_caches' \
+        --export-markdown bench_exec_result.md
         --warmup 10 \
         --min-runs 100 \
         'sudo ./youki_main run -b benchmark_exec_bundle main_container && sudo ./youki_main delete -f main_container' \
         'sudo ./youki_pr run -b benchmark_exec_bundle pr_container && sudo ./youki_pr delete -f pr_container'
+
+    - name: Using CML
+      uses: iterative/setup-cml@v1
+
+    - name: Writting report to PR comment
+      run: cml-send-comment bench_exec_result.md 

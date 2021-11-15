@@ -90,9 +90,15 @@ jobs:
         name: main-youki
         path: ./main_youki
 
+    - name: Show folder lah
+      run: | 
+        ls -la
+        ls -la ./main_youki
+        ls -la ./pr_youki
+
     - name: Preparing benchmark bundle
       run: |
-        mkdir -p benchmark_exec_bundle/rootfs
+        mkdir -p ./benchmark_exec_bundle/rootfs
         cd benchmark_exec_bundle
         sudo bash -c 'podman export $(podman create busybox) | tar -C rootfs -xvf -'
         ../main_youki spec 
@@ -105,9 +111,6 @@ jobs:
         | jq -r '.assets[] | select(.name? | match("hyperfine-musl_.*_amd64.deb")) | .browser_download_url' \
         | wget -qi -
         sudo dpkg -i *.deb
-
-    - name: Show folder lah
-      run: ls -la
 
     - name: Running benchmark
       run: |

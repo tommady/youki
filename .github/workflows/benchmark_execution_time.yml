@@ -70,10 +70,10 @@ jobs:
     - name: Show folder lah
       run: ls -la
 
-        # - name: Running benchmark
-        #   run: |
-        #     hyperfine --show-output --prepare 'sudo sync; echo 3 | sudo tee /proc/sys/vm/drop_caches' \
-        #     --warmup 10 \
-        #     --min-runs 100 \
-        #     'sudo ./main_youki run -b benchmark_exec_bundle main_youki && sudo ./main_youki delete -f main_youki' \
-        #     'sudo ./pr_youki run -b benchmark_exec_bundle pr_youki && sudo ./pr_youki delete -f pr_youki'
+    - name: Running benchmark
+      run: |
+        hyperfine --show-output --prepare 'sudo sync; echo 3 | sudo tee /proc/sys/vm/drop_caches' \
+        --warmup 10 \
+        --min-runs 100 \
+        'sudo ./main_youki run -b benchmark_exec_bundle main_container && sudo ./main_youki delete -f main_container' \
+        'sudo ./pr_youki run -b benchmark_exec_bundle pr_container && sudo ./pr_youki delete -f pr_container'

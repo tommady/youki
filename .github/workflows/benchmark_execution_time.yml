@@ -25,6 +25,9 @@ jobs:
         override: true
         profile: minimal
 
+    - name: Using cache youki
+      uses: Swatinem/rust-cache@v1
+
     - name: Building PR branch
       run: ./build.sh --release
 
@@ -55,6 +58,9 @@ jobs:
         toolchain: stable
         override: true
         profile: minimal
+
+    - name: Using cache youki
+      uses: Swatinem/rust-cache@v1
       
     - name: Building main branch
       run: ./build.sh --release
@@ -96,12 +102,6 @@ jobs:
         mv ./pr_youki/youki ./youki_pr
         chmod +x ./youki_main
         chmod +x ./youki_pr
-
-    - name: Show folder lah
-      run: | 
-        ls -la
-        ls -la ./main_youki
-        ls -la ./pr_youki
 
     - name: Preparing benchmark bundle
       run: |

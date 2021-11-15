@@ -60,7 +60,7 @@ jobs:
         sed -i 's/"sh"/"sh", "-c", "echo Hi, my PID is $$; echo Bye Bye"/' config.json
         sed -i 's/"terminal": true/"terminal": false/' config.json
         cd ../
-        cp -r benchmark_exec_bundle_main benchmark_exec_bundle_pr
+        sudo cp -r benchmark_exec_bundle_main benchmark_exec_bundle_pr
           
     - name: Installing hyperfine
       run: |

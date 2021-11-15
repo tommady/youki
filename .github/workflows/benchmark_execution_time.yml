@@ -49,7 +49,7 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: pr-youki
-        path: ./pr-youki
+        path: ./pr_youki
 
     - name: Preparing benchmark bundle
       run: |

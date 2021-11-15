@@ -72,4 +72,3 @@ jobs:
         --warmup 10 \
         --min-runs 100 \
         'sudo ./main_youki run -b benchmark_exec_bundle' 'sudo ./pr_youki run -b benchmark_exec_bundle'
- 

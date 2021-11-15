@@ -129,11 +129,10 @@ jobs:
 
     - name: Adding info into result
       run: |
-        sed -i '1i > commit (${{ github.sha }})' bench_exec_result.md
+        sed -i '1i > commit (${{ github.sha }})\n' bench_exec_result.md
 
     - name: Writting report to PR comment
       uses: marocchino/sticky-pull-request-comment@v2 
       with:
-        message: |
-          commit hash: ${{ github.sha }}
+        append: true
         path: ./bench_exec_result.md 

@@ -69,7 +69,7 @@ jobs:
 
     - name: Running benchmark
       run: |
-        hyperfine --prepare 'sudo sync; echo 3 | sudo tee /proc/sys/vm/drop_caches' \
+        hyperfine --show-output --prepare 'sudo sync; echo 3 | sudo tee /proc/sys/vm/drop_caches' \
         --warmup 10 \
         --min-runs 100 \
         'sudo ./main_youki run -b benchmark_exec_bundle main_youki && sudo ./main_youki delete -f main_youki' \

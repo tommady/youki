@@ -1,5 +1,10 @@
 # Changelog
 
+## [v0.0.1](https://github.com/tommady/youki/commits/v0.0.1) - 2025-08-14
+### Other Changes
+- (auto merged) chore(deps): bump the patch group with 4 updates by @dependabot[bot] in https://github.com/tommady/youki/pull/148
+- (auto merged) chore(deps): bump the patch group with 3 updates by @dependabot[bot] in https://github.com/tommady/youki/pull/150
+
 ## [v0.5.4](https://github.com/youki-dev/youki/compare/v0.5.3...v0.5.4) - 2025-07-17
 ### 💪 Improvements
 - add support exec-cpu-affinity by @saku3 in https://github.com/youki-dev/youki/pull/3164

@@ -1,5 +1,16 @@
 # Changelog
 
+## [v0.0.1](https://github.com/tommady/youki/commits/v0.0.1) - 2025-09-09
+### Other Changes
+- (auto merged) chore(deps): bump the patch group with 4 updates by @dependabot[bot] in https://github.com/tommady/youki/pull/148
+- (auto merged) chore(deps): bump the patch group with 3 updates by @dependabot[bot] in https://github.com/tommady/youki/pull/150
+- (auto merged) chore(deps): bump thiserror from 2.0.14 to 2.0.15 in the patch group by @dependabot[bot] in https://github.com/tommady/youki/pull/152
+- (auto merged) chore(deps): bump serde_json from 1.0.142 to 1.0.143 in the patch group by @dependabot[bot] in https://github.com/tommady/youki/pull/153
+- (auto merged) chore(deps): bump thiserror from 2.0.15 to 2.0.16 in the patch group by @dependabot[bot] in https://github.com/tommady/youki/pull/154
+- (auto merged) chore(deps): bump regex from 1.11.1 to 1.11.2 in the patch group by @dependabot[bot] in https://github.com/tommady/youki/pull/156
+- (auto merged) chore(deps): bump tracing-subscriber from 0.3.19 to 0.3.20 in the patch group by @dependabot[bot] in https://github.com/tommady/youki/pull/157
+- (auto merged) chore(deps): bump chrono from 0.4.41 to 0.4.42 in the patch group by @dependabot[bot] in https://github.com/tommady/youki/pull/158
+
 ## [v0.5.5](https://github.com/youki-dev/youki/compare/v0.5.4...v0.5.5) - 2025-08-14
 ### 💪 Improvements
 - fix(3198): fix difference in how commands are passed after exec and ps by @tommady in https://github.com/youki-dev/youki/pull/3201

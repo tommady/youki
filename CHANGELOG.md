@@ -1,5 +1,7 @@
 # Changelog
 
+## [v0.0.1](https://github.com/tommady/youki/commits/v0.0.1) - 2026-09-13
+
 ## [v0.7.0](https://github.com/youki-dev/youki/compare/v0.6.0...v0.7.0) - 2026-07-23
 
 ### 💪 Improvements
